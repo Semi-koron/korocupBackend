@@ -1,0 +1,29 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: air.dockerfile
+    tty: true
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    container_name: db
+    build: 
+      context: .
+      dockerfile: db.dockerfile
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'postgres'
+volumes:
+  db-store:
