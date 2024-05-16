@@ -3,7 +3,7 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: air.dockerfile
+      dockerfile: ./docker/air.dockerfile
     tty: true
     ports:
       - 8080:8080
@@ -16,7 +16,7 @@ services:
     container_name: db
     build: 
       context: .
-      dockerfile: db.dockerfile
+      dockerfile: ./docker/db.dockerfile
     ports:
       - 5432:5432
     volumes:
