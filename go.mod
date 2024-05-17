@@ -1,4 +1,4 @@
-module websocket
+module github.com/semikoron/korocupbackend
 
 go 1.22.2
 
