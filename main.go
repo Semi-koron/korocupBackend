@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"log"
-	"net/http"
 
 	"github.com/semikoron/korocupbackend/database"
 	"github.com/semikoron/korocupbackend/schema"
+	"github.com/semikoron/korocupbackend/services"
 	"github.com/semikoron/korocupbackend/utils/config"
 
 	"github.com/labstack/echo/v4"
@@ -24,8 +24,6 @@ func main() {
 		log.Fatalln(err)
 	}
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "change files")
-	})
+	e.GET("/", services.Hello)
 	e.Logger.Fatal(e.Start(":8080"))
 }
