@@ -1,11 +1,8 @@
 package main
 
 import (
-	"context"
-	"log"
-
+	"github.com/semikoron/korocupbackend/crud"
 	"github.com/semikoron/korocupbackend/database"
-	"github.com/semikoron/korocupbackend/schema"
 	"github.com/semikoron/korocupbackend/services"
 	"github.com/semikoron/korocupbackend/utils/config"
 
@@ -16,13 +13,8 @@ func main() {
 	// Open a PostgreSQL database.
 	config.LoadEnv()
 	database.Connect()
-	if _, err := database.DB.NewCreateTable().Model((*schema.User)(nil)).Exec(context.TODO()); err != nil {
-		log.Fatalln(err)
-	}
-	user := &schema.User{Name: "鈴木太郎"}
-	if _, err := database.DB.NewInsert().Model(user).Exec(context.TODO()); err != nil {
-		log.Fatalln(err)
-	}
+	defer database.DB.Close()
+	crud.Test()
 	e := echo.New()
 	e.GET("/", services.Hello)
 	e.Logger.Fatal(e.Start(":8080"))
