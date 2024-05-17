@@ -32,3 +32,11 @@ type Post struct {
 	UpdatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
 	DeletedAt time.Time `bun:",nullzero"`
 }
+
+type Like struct {
+	bun.BaseModel `bun:"table:likes,alias:l"`
+	ID            int `bun:",pk,autoincrement"`
+	UserID        int
+	PostID        int
+	CreatedAt     time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+}
