@@ -5,7 +5,11 @@ FROM golang:1.22.2-alpine3.19 AS builder
 # 作業ディレクトリの定義をする。今回は、app ディレクトリとした。
 WORKDIR /app
 # go.mod と go.sum を app ディレクトリにコピー
-COPY . /app
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
+COPY . .
+RUN go build -o main main.go
 # 指定されたモジュールをダウンロードする。
 RUN go mod download && go mod verify
 # ルートディレクトリの中身を app フォルダにコピーする
