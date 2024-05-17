@@ -14,6 +14,7 @@ func main() {
 	config.LoadEnv()
 	database.Connect()
 	defer database.DB.Close()
+	database.InitDB()
 	crud.Test()
 	e := echo.New()
 	e.GET("/", services.Hello)
