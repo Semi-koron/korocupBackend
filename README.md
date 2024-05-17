@@ -8,7 +8,7 @@ $ git clone git@github.com:Semi-koron/korocupBackend2024.git
 $ cd korocupBackend2024
 
 # 依存モジュールをインストールする
-$ go mod tidy
+$ go mod download
 
 # サーバーを起動
 $ docker compose up -d
