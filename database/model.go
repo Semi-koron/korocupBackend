@@ -19,3 +19,16 @@ type User struct {
 	UpdatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
 	DeletedAt time.Time `bun:",nullzero"`
 }
+
+type Post struct {
+	bun.BaseModel `bun:"table:posts,alias:p"`
+
+	ID        int `bun:",pk,autoincrement"`
+	UserID    int
+	Image     []byte
+	Reply     int
+	Likes     int
+	CreatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+	UpdatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+	DeletedAt time.Time `bun:",nullzero"`
+}
