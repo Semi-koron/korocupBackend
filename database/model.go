@@ -35,8 +35,8 @@ type Post struct {
 
 type Like struct {
 	bun.BaseModel `bun:"table:likes,alias:l"`
-	ID            int `bun:",pk,autoincrement"`
-	UserID        int
-	PostID        int
+	ID            int       `bun:",pk,autoincrement"`
+	UserID        int       `bun:",notnull, unique:u_l"`
+	PostID        int       `bun:",notnull, unique:u_l"`
 	CreatedAt     time.Time `bun:",nullzero,notnull,default:current_timestamp"`
 }
