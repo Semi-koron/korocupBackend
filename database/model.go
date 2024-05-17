@@ -9,10 +9,10 @@ import (
 type User struct {
 	bun.BaseModel `bun:"table:users,alias:u"`
 
-	ID        int `bun:",pk,autoincrement"`
-	Name      string
-	Email     string `bun:",unique"`
-	Password  string
+	ID        int    `bun:",pk,autoincrement"`
+	Name      string `bun:",unique, notnull"`
+	Email     string `bun:",unique, notnull"`
+	Password  string `bun:",notnull"`
 	Icon      int
 	Profile   int
 	CreatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
