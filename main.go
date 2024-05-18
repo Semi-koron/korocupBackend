@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/semikoron/korocupbackend/database"
+	"github.com/semikoron/korocupbackend/originalmiddleware"
 	"github.com/semikoron/korocupbackend/services"
 	"github.com/semikoron/korocupbackend/utils/config"
 
@@ -20,7 +21,6 @@ func main() {
 	}))
 	e.Use(middleware.CORS())
 	e.Use(middleware.Recover())
-	e.GET("/", services.Hello)
 	// User
 	e.POST("/create/user", services.NewUser)                 // ユーザーを作成
 	e.GET("/fetch/users", services.FetchUsers)               // すべてのユーザーを取得
@@ -30,5 +30,8 @@ func main() {
 	e.POST("/create/post", services.NewPost)
 	e.GET("/get/posts", services.GetPosts)
 	e.GET("/get/post/:postid", services.GetPostDetail)
+	r := e.Group("/login")
+	r.Use(originalmiddleware.FirebaseAuthMiddleware)
+	r.GET("/", services.Hello)
 	e.Logger.Fatal(e.Start(":8080"))
 }
