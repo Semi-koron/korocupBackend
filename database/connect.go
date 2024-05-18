@@ -1,24 +1,20 @@
 package database
 
 import (
-	"database/sql"
-
 	"github.com/semikoron/korocupbackend/utils/config"
-
-	"github.com/uptrace/bun"
-	"github.com/uptrace/bun/dialect/pgdialect"
-	"github.com/uptrace/bun/driver/pgdriver"
-	"github.com/uptrace/bun/extra/bundebug"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-var DB *bun.DB
+var DB *gorm.DB
+var err error
 
-func Connect() {
-	dsn := "postgres://" + config.PostgreSQLUser + ":" + config.PostgreSQLPassword + "@" + config.PostgreSQLConfig
-	Sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
-
-	DB = bun.NewDB(Sqldb, pgdialect.New())
-	DB.AddQueryHook(bundebug.NewQueryHook(
-		bundebug.WithVerbose(true),
-	))
+func ConnectDB() {
+	dsn := "host=db user=" + config.PostgreSQLUser + " password=" + config.PostgreSQLPassword + " dbname=" + config.PostgreSQLConfig
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+	// Migrate the schema
+	DB.AutoMigrate(&User{}, &Post{}, &Like{})
 }
