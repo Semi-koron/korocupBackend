@@ -12,7 +12,7 @@ func DeleteUser(c echo.Context) error {
 
 	user := database.User{}
 	firebaseUid := c.Get("uid").(string)
-	if err := crud.CanDeleteUser(firebaseUid, user); err != nil {
+	if err := crud.CanUpdateUser(firebaseUid, user); err != nil {
 		return err
 	}
 
