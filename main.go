@@ -30,7 +30,7 @@ func main() {
 	e.POST("/create/post", services.NewPost)
 	e.GET("/get/posts", services.GetPosts)
 	e.GET("/get/post/:postid", services.GetPostDetail)
-	r := e.Group("/login")
+	r := e.Group("/auth")
 	r.Use(originalmiddleware.FirebaseAuthMiddleware)
 	r.GET("/", services.Hello)
 	e.Logger.Fatal(e.Start(":8080"))
