@@ -4,19 +4,27 @@ import (
 	"github.com/semikoron/korocupbackend/database"
 )
 
-type Body struct {
-	UserName string `json:"user_id"`
-	Icon     int    `json:"icon"`
-	Profile  int    `json:"profile"`
+func Can_UpdateUser(profileUpdateUid string, user database.User) error {
+
+	if err := database.DB.Debug().Where("firebase_uid = ?", profileUpdateUid).First(&user).Error; err != nil {
+		return err
+	}
+
+	return nil
+
 }
 
-func UpdateUserDb(user database.User, tmp Body) database.User {
+func UpdateUserDb(
+	user database.User,
+	newName string,
+	newIcon int,
+	newProfile int) database.User {
 
 	database.DB.Model(&user).Updates(
 		database.User{
-			UserName: tmp.UserName,
-			Icon:     tmp.Icon,
-			Profile:  tmp.Profile})
+			UserName: newName,
+			Icon:     newIcon,
+			Profile:  newProfile})
 
 	return user
 
