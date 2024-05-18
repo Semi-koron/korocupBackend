@@ -6,7 +6,7 @@ import (
 
 type User struct {
 	ID          int `gorm:"primaryKey"`
-	UserID      string
+	UserName    string
 	FirebaseUID string
 	Icon        int
 	Profile     int
@@ -17,8 +17,7 @@ type User struct {
 
 type Post struct {
 	ID        int `gorm:"primaryKey"`
-	UserID    string
-	User      *User
+	UserName  string
 	Image     string
 	Reply     int
 	Likes     int
@@ -29,9 +28,7 @@ type Post struct {
 
 type Like struct {
 	ID        int `gorm:"primaryKey"`
-	UserID    string
-	User      *User
+	UserName  string
 	PostID    int
-	Post      *Post
 	CreatedAt time.Time
 }
