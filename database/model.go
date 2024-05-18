@@ -10,7 +10,7 @@ type User struct {
 	bun.BaseModel `bun:"table:users,alias:u"`
 
 	ID          int    `bun:",pk,autoincrement"`
-	Name        string `bun:",unique,notnull"`
+	Name        string `bun:",notnull"`
 	Email       string `bun:",unique,notnull"`
 	Password    string `bun:",notnull"`
 	DisplayName string `bun:",notnull,unique"`
