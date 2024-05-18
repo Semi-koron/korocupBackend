@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/semikoron/korocupbackend/crud"
 	"github.com/semikoron/korocupbackend/database"
 	"github.com/semikoron/korocupbackend/services"
 	"github.com/semikoron/korocupbackend/utils/config"
@@ -15,7 +14,6 @@ func main() {
 	database.Connect()
 	defer database.DB.Close()
 	database.InitDB()
-	crud.Test()
 	e := echo.New()
 	e.GET("/", services.Hello)
 	e.Logger.Fatal(e.Start(":8080"))
