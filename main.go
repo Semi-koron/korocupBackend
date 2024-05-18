@@ -26,12 +26,11 @@ func main() {
 	e.GET("/get/user/:user_id", services.GetUserProfile)  // ユーザーのプロフィールを取得
 	e.GET("/search/user/:user_name", services.SearchUser) // ユーザーを検索
 	// Post
-	e.POST("/create/post", services.NewPost)
-	e.GET("/get/posts", services.GetPosts)
-	e.GET("/get/post/:postid", services.GetPostDetail)
-	r := e.Group("/auth")
-	r.Use(originalmiddleware.FirebaseAuthMiddleware)
-	r.GET("/test", services.Hello)
+	e.GET("/get/posts", services.GetPosts)             // すべての投稿を取得
+	e.GET("/get/post/:postid", services.GetPostDetail) // 投稿の詳細(返信元, 返信一覧)を取得
+	r := e.Group("/auth")                              // 認証が必要なエンドポイントはすべて/auth以下にまとめる
+	r.Use(originalmiddleware.FirebaseAuthMiddleware)   // 認証ミドルウェアを適用
+	r.GET("/test", services.Hello)                     // テスト用
 
 	// User
 	r.PUT("/update/user", services.UpdateUser) // ユーザーのプロフィールを更新
