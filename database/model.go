@@ -9,15 +9,13 @@ import (
 type User struct {
 	bun.BaseModel `bun:"table:users,alias:u"`
 
-	UserID    string `bun:",pk,notnull"`
-	Name      string `bun:",notnull"`
-	Email     string `bun:",unique,notnull"`
-	Password  string `bun:",notnull"`
-	Icon      int
-	Profile   int
-	CreatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
-	UpdatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
-	DeletedAt time.Time `bun:",nullzero"`
+	UserID      string `bun:",pk,notnull"`
+	FirebaseUID string `bun:",notnull,unique"`
+	Icon        int
+	Profile     int
+	CreatedAt   time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+	UpdatedAt   time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+	DeletedAt   time.Time `bun:",nullzero"`
 }
 
 type Post struct {
@@ -25,7 +23,7 @@ type Post struct {
 
 	ID        int       `bun:",pk,autoincrement"`
 	UserID    string    `bun:",notnull"`
-	User      *User     `bun:"rel:belongs-to,join:user_name=user_name"`
+	User      *User     `bun:"rel:belongs-to,join:user_id=user_id"`
 	Image     []byte    `bun:",notnull"`
 	Reply     int       `bun:",nullzero"`
 	Likes     int       `bun:",nullzero"`
