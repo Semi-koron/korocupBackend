@@ -9,15 +9,16 @@ import (
 type User struct {
 	bun.BaseModel `bun:"table:users,alias:u"`
 
-	ID        int    `bun:",pk,autoincrement"`
-	Name      string `bun:",unique,notnull"`
-	Email     string `bun:",unique,notnull"`
-	Password  string `bun:",notnull"`
-	Icon      int
-	Profile   int
-	CreatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
-	UpdatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
-	DeletedAt time.Time `bun:",nullzero"`
+	ID          int    `bun:",pk,autoincrement"`
+	Name        string `bun:",unique,notnull"`
+	Email       string `bun:",unique,notnull"`
+	Password    string `bun:",notnull"`
+	DisplayName string `bun:",notnull,unique"`
+	Icon        int
+	Profile     int
+	CreatedAt   time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+	UpdatedAt   time.Time `bun:",nullzero,notnull,default:current_timestamp"`
+	DeletedAt   time.Time `bun:",nullzero"`
 }
 
 type Post struct {
