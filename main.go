@@ -29,6 +29,8 @@ func main() {
 	e.POST("/create/post", services.NewPost)
 	e.GET("/get/posts", services.GetPosts)
 	e.GET("/get/post/:postid", services.GetPostDetail)
-	e.GET("/", services.Hello, originalmiddleware.FirebaseAuthMiddleware)
+	r := e.Group("/login")
+	r.Use(originalmiddleware.FirebaseAuthMiddleware)
+	r.GET("/", services.Hello)
 	e.Logger.Fatal(e.Start(":8080"))
 }
