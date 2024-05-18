@@ -24,7 +24,7 @@ type Post struct {
 	ID        int       `bun:",pk,autoincrement"`
 	UserID    string    `bun:",notnull"`
 	User      *User     `bun:"rel:belongs-to,join:user_id=user_id"`
-	Image     []byte    `bun:",notnull"`
+	Image     string    `bun:",notnull"`
 	Reply     int       `bun:",nullzero"`
 	Likes     int       `bun:",nullzero"`
 	CreatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
@@ -35,7 +35,7 @@ type Post struct {
 type Like struct {
 	bun.BaseModel `bun:"table:likes,alias:l"`
 	ID            int       `bun:",pk,autoincrement"`
-	UserName      string    `bun:",notnull,unique:u_l"`
+	UserID        string    `bun:",notnull,unique:u_l"`
 	User          *User     `bun:"rel:belongs-to,join:user_id=user_id"`
 	PostID        int       `bun:",notnull,unique:u_l"`
 	Post          *Post     `bun:"rel:belongs-to,join:post_id=id"`
