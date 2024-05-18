@@ -34,7 +34,10 @@ func main() {
 
 	// User
 	r.PUT("/update/user", services.UpdateUser) // ユーザーのプロフィールを更新
-	r.POST("/login", services.Login)         // ユーザーをログイン
-	r.POST("/create/user", services.NewUser) // ユーザーを作成
+	r.POST("/login", services.Login)           // ユーザーをログイン
+	r.POST("/create/user", services.NewUser)   // ユーザーを作成
+
+	// Post
+	r.POST("/create/post", services.NewPost) // 投稿を作成
 	e.Logger.Fatal(e.Start(":8080"))
 }
