@@ -12,9 +12,7 @@ import (
 func main() {
 	// Open a PostgreSQL database.
 	config.LoadEnv()
-	database.Connect()
-	defer database.DB.Close()
-	database.InitDB()
+	database.ConnectDB()
 	e := echo.New()
 
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
