@@ -24,7 +24,7 @@ type Post struct {
 	ID        int       `bun:",pk,autoincrement"`
 	UserID    string    `bun:",notnull"`
 	User      *User     `bun:"rel:belongs-to,join:user_id=user_id"`
-	Image     []byte    `bun:",notnull"`
+	Image     string    `bun:",notnull"`
 	Reply     int       `bun:",nullzero"`
 	Likes     int       `bun:",nullzero"`
 	CreatedAt time.Time `bun:",nullzero,notnull,default:current_timestamp"`
