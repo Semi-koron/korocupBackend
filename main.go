@@ -22,6 +22,8 @@ func main() {
 	e.Use(middleware.Recover())
 	e.GET("/", services.Hello)
 	e.POST("/create/user", services.NewUser)
+	//posts
 	e.POST("/create/post", services.NewPost)
+	e.GET("/get/posts", services.GetPosts)
 	e.Logger.Fatal(e.Start(":8080"))
 }
