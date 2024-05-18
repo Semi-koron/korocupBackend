@@ -21,7 +21,10 @@ func main() {
 	e.Use(middleware.CORS())
 	e.Use(middleware.Recover())
 	e.GET("/", services.Hello)
-	e.POST("/create/user", services.NewUser)
+	// User
+	e.POST("/create/user", services.NewUser)   // ユーザーを作成
+	e.GET("/fetch/users", services.FetchUsers) // すべてのユーザーを取得
+	// Post
 	e.POST("/create/post", services.NewPost)
 	e.Logger.Fatal(e.Start(":8080"))
 }
