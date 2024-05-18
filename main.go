@@ -22,8 +22,9 @@ func main() {
 	e.Use(middleware.CORS())
 	e.Use(middleware.Recover())
 	// User
-	e.GET("/fetch/users", services.FetchUsers)           // すべてのユーザーを取得
-	e.GET("/get/user/:user_id", services.GetUserProfile) // ユーザーのプロフィールを取得
+	e.GET("/fetch/users", services.FetchUsers)            // すべてのユーザーを取得
+	e.GET("/get/user/:user_id", services.GetUserProfile)  // ユーザーのプロフィールを取得
+	e.GET("/search/user/:user_name", services.SearchUser) // ユーザーを検索
 	// Post
 	e.POST("/create/post", services.NewPost)
 	e.GET("/get/posts", services.GetPosts)
