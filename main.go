@@ -31,9 +31,10 @@ func main() {
 	e.GET("/get/post/:postid", services.GetPostDetail)
 	r := e.Group("/auth")
 	r.Use(originalmiddleware.FirebaseAuthMiddleware)
-	r.GET("/", services.Hello)
+	r.GET("/test", services.Hello)
 
 	// User
+	r.POST("/login", services.Login)         // ユーザーを作成
 	r.POST("/create/user", services.NewUser) // ユーザーを作成
 	e.Logger.Fatal(e.Start(":8080"))
 }
