@@ -36,15 +36,13 @@ func FirebaseAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
 		app, err := FirebaseInit()
 		if err != nil {
-			return err
+			return echo.NewHTTPError(http.StatusInternalServerError, "Firebase init error")
 		}
 		auth, err := app.Auth(context.Background())
 		if err != nil {
-			fmt.Println(err)
-			return err
+			return echo.NewHTTPError(http.StatusInternalServerError, "Firebase auth error")
 		}
 		token, err := auth.VerifyIDToken(context.Background(), idToken)
-		fmt.Println(token)
 		if err != nil {
 			return echo.NewHTTPError(http.StatusUnauthorized, "Invalid token")
 		}
