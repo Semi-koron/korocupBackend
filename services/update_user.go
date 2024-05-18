@@ -27,11 +27,6 @@ func UpdateUser(c echo.Context) error {
 		return err
 	}
 
-	/*
-		if err := database.DB.Where("firebase_uid = ?", profileUpdateUid).First(&user).Error; err != nil {
-			return err
-		}*/
-
 	user = crud.UpdateUserDb(
 		user,
 		obj.UserName,
