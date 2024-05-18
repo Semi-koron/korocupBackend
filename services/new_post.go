@@ -5,17 +5,19 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/semikoron/korocupbackend/crud"
-	"github.com/semikoron/korocupbackend/database"
 )
 
 func NewPost(c echo.Context) error {
-	post := database.Post{}
-	if err := c.Bind(&post); err != nil {
+	type body struct {
+		UserName string `json:"user_name"`
+		Image    string `json:"image"`
+		Reply    int    `json:"reply"`
+		Likes    int    `json:"likes"`
+	}
+	obj := body{}
+	if err := c.Bind(&obj); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
-	ctx := c.Request().Context()
-	if err := crud.CreatePost(post, ctx); err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, err)
-	}
-	return c.JSON(http.StatusCreated, post)
+	CreatedPost, _ := crud.CreatePost(obj.UserName, obj.Image, obj.Reply, obj.Likes, c)
+	return c.JSON(http.StatusCreated, CreatedPost)
 }
