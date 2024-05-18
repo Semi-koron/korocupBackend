@@ -27,5 +27,6 @@ func main() {
 	// Post
 	e.POST("/create/post", services.NewPost)
 	e.GET("/get/posts", services.GetPosts)
+	e.GET("/get/post/:postid", services.GetPostDetail)
 	e.Logger.Fatal(e.Start(":8080"))
 }
