@@ -11,7 +11,9 @@ var err error
 
 func ConnectDB() {
 	dsn := "host=db user=" + config.PostgreSQLUser + " password=" + config.PostgreSQLPassword + " dbname=" + config.PostgreSQLConfig
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		DisableForeignKeyConstraintWhenMigrating: true,
+	})
 	if err != nil {
 		panic("failed to connect database")
 	}

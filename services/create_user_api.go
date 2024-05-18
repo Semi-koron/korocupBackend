@@ -10,7 +10,7 @@ import (
 
 func NewUser(c echo.Context) error {
 	type body struct {
-		UserID      string `json:"user_id"`
+		UserName    string `json:"user_id"`
 		FirebaseUID string `json:"firebase_uid"`
 		Icon        int    `json:"icon"`
 		Profile     int    `json:"profile"`
@@ -21,7 +21,7 @@ func NewUser(c echo.Context) error {
 	if err := c.Bind(&obj); err != nil {
 		return err
 	}
-	user.UserID = obj.UserID
+	user.UserName = obj.UserName
 	user.FirebaseUID = obj.FirebaseUID
 	user.Icon = obj.Icon
 	user.Profile = obj.Profile
