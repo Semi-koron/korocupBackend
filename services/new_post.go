@@ -9,15 +9,21 @@ import (
 
 func NewPost(c echo.Context) error {
 	type body struct {
-		UserName string `json:"user_name"`
+		UserName string
 		Image    string `json:"image"`
 		Reply    int    `json:"reply"`
 		Likes    int    `json:"likes"`
 	}
 	obj := body{}
+
+	// UIDからusernameの取得
+	uid := c.Get("uid").(string)
+
 	if err := c.Bind(&obj); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}
+	obj.UserName = crud.GetUsername(uid)
+
 	CreatedPost, _ := crud.CreatePost(obj.UserName, obj.Image, obj.Reply, obj.Likes, c)
 	return c.JSON(http.StatusCreated, CreatedPost)
 }
