@@ -34,7 +34,7 @@ func main() {
 	r.GET("/test", services.Hello)
 
 	// User
-	r.POST("/login", services.Login)         // ユーザーを作成
+	r.POST("/login", services.Login)         // ユーザーをログイン
 	r.POST("/create/user", services.NewUser) // ユーザーを作成
 	e.Logger.Fatal(e.Start(":8080"))
 }
