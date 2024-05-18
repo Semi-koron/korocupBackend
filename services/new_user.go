@@ -11,9 +11,9 @@ import (
 func NewUser(c echo.Context) error {
 	type body struct {
 		UserName    string `json:"user_id"`
-		FirebaseUID string `json:"firebase_uid"`
-		Icon        int    `json:"icon"`
-		Profile     int    `json:"profile"`
+		FirebaseUID string
+		Icon        int `json:"icon"`
+		Profile     int `json:"profile"`
 	}
 	obj := body{}
 	user := database.User{}
@@ -23,7 +23,7 @@ func NewUser(c echo.Context) error {
 	}
 
 	user.UserName = obj.UserName
-	user.FirebaseUID = obj.FirebaseUID
+	user.FirebaseUID = c.Get("uid").(string)
 	user.Icon = obj.Icon
 	user.Profile = obj.Profile
 	user = crud.CreateUserDb(user)

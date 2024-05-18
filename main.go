@@ -22,7 +22,6 @@ func main() {
 	e.Use(middleware.CORS())
 	e.Use(middleware.Recover())
 	// User
-	e.POST("/create/user", services.NewUser)                 // ユーザーを作成
 	e.GET("/fetch/users", services.FetchUsers)               // すべてのユーザーを取得
 	e.PUT("/update/user/:firebase_uid", services.UpdateUser) // ユーザーのプロフィールを更新
 	e.GET("/get/user/:user_id", services.GetUserProfile)     // ユーザーのプロフィールを取得
@@ -33,5 +32,8 @@ func main() {
 	r := e.Group("/auth")
 	r.Use(originalmiddleware.FirebaseAuthMiddleware)
 	r.GET("/", services.Hello)
+
+	// User
+	r.POST("/create/user", services.NewUser) // ユーザーを作成
 	e.Logger.Fatal(e.Start(":8080"))
 }
