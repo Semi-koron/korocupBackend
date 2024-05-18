@@ -26,5 +26,6 @@ func main() {
 	e.GET("/fetch/users", services.FetchUsers) // すべてのユーザーを取得
 	// Post
 	e.POST("/create/post", services.NewPost)
+	e.GET("/get/posts", services.GetPosts)
 	e.Logger.Fatal(e.Start(":8080"))
 }
