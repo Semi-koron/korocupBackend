@@ -4,7 +4,7 @@ import (
 	"github.com/semikoron/korocupbackend/database"
 )
 
-func Can_UpdateUser(profileUpdateUid string, user database.User) error {
+func CanUpdateUser(profileUpdateUid string, user database.User) error {
 
 	if err := database.DB.Debug().Where("firebase_uid = ?", profileUpdateUid).First(&user).Error; err != nil {
 		return err

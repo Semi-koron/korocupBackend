@@ -23,7 +23,7 @@ func UpdateUser(c echo.Context) error {
 	}
 	user := database.User{}
 
-	if err := crud.Can_UpdateUser(profileUpdateUid, user); err != nil {
+	if err := crud.CanUpdateUser(profileUpdateUid, user); err != nil {
 		return err
 	}
 
