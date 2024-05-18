@@ -16,7 +16,7 @@ func UpdateUser(c echo.Context) error {
 		Profile  int    `json:"profile"`
 	}
 
-	profileUpdateUid := c.Param("firebase_uid")
+	profileUpdateUid := c.Get("uid").(string)
 	obj := body{}
 	if err := c.Bind(&obj); err != nil {
 		return err
@@ -31,7 +31,8 @@ func UpdateUser(c echo.Context) error {
 		user,
 		obj.UserName,
 		obj.Icon,
-		obj.Profile)
+		obj.Profile,
+		profileUpdateUid)
 
 	return c.JSON(http.StatusOK, user)
 
