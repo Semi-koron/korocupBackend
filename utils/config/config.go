@@ -10,6 +10,8 @@ import (
 var (
 	PostgreSQLUser     string
 	PostgreSQLPassword string
+	PostgreSQLDBName   string
+	PostgreSQLPort     string
 	PostgreSQLConfig   string
 )
 
@@ -22,5 +24,7 @@ func LoadEnv() {
 	}
 	PostgreSQLUser = os.Getenv("POSTGRESQLUSER")
 	PostgreSQLPassword = os.Getenv("POSTGRESQLPASSWORD")
+	PostgreSQLDBName = os.Getenv("POSTGRESQLDBNAME")
+	PostgreSQLPort = os.Getenv("POSTGRESQLPORT")
 	PostgreSQLConfig = os.Getenv("POSTGRESQLCONFIG")
 }
