@@ -1,7 +1,6 @@
 package originalmiddleware
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -17,7 +16,6 @@ func FirebaseInit() (*firebase.App, error) {
 	opt := option.WithCredentialsFile("/app/korocup2024-firebase-adminsdk-37xv8-f9c212121c.json")
 	app, err := firebase.NewApp(context.Background(), nil, opt)
 	if err != nil {
-		fmt.Println("error")
 		return nil, err
 	}
 	return app, nil
@@ -32,7 +30,6 @@ func FirebaseAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 
 		idToken := strings.Replace(authHeader, "Bearer ", "", 1)
-		fmt.Println(idToken)
 
 		app, err := FirebaseInit()
 		if err != nil {
