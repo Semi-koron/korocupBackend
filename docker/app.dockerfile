@@ -9,7 +9,6 @@ COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
 COPY . .
-RUN go build -o main main.go
 # 指定されたモジュールをダウンロードする。
 RUN go mod download && go mod verify
 # ルートディレクトリの中身を app フォルダにコピーする
