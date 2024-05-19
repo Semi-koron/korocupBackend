@@ -11,7 +11,7 @@ func UpdateUser(c echo.Context) error {
 
 	type body struct {
 		UserName string `json:"user_id"`
-		Icon     int    `json:"icon"`
+		Icon     string `json:"icon"`
 		Profile  int    `json:"profile"`
 	}
 

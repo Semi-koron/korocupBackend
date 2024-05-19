@@ -7,13 +7,13 @@ import (
 func UpdateUserDb(
 	user database.User,
 	newName string,
-	newIcon int,
+	newIcon string,
 	newProfile int,
 	profileUpdateUid string) database.User {
 
 	database.DB.Where("firebase_uid = ?", profileUpdateUid).First(&user)
 
-	database.DB.Debug().Model(&user).
+	database.DB.Model(&user).
 		Updates(
 			database.User{
 				UserName: newName,
