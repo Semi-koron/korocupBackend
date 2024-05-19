@@ -39,6 +39,7 @@ func main() {
 	r.DELETE("/delete/user", services.DeleteUser) // ユーザーを削除
 
 	// Post
-	r.POST("/create/post", services.NewPost) // 投稿を作成
+	r.POST("/create/post", services.NewPost)      // 投稿を作成
+	r.DELETE("/delete/post", services.DeletePost) // 投稿を削除
 	e.Logger.Fatal(e.Start(":8080"))
 }
