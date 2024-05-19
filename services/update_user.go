@@ -5,7 +5,6 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/semikoron/korocupbackend/crud"
-	"github.com/semikoron/korocupbackend/database"
 )
 
 func UpdateUser(c echo.Context) error {
@@ -21,9 +20,9 @@ func UpdateUser(c echo.Context) error {
 	if err := c.Bind(&obj); err != nil {
 		return err
 	}
-	user := database.User{}
 
-	if err := crud.CanUpdateUser(profileUpdateUid, user); err != nil {
+	user, err := crud.GetUser(profileUpdateUid)
+	if err != nil {
 		return err
 	}
 
