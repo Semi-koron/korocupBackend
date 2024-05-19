@@ -5,9 +5,9 @@ import (
 )
 
 type User struct {
-	ID          int `gorm:"primaryKey"`
-	UserName    string
-	FirebaseUID string
+	ID          int    `gorm:"primaryKey"`
+	UserName    string `gorm:"unique;not null"`
+	FirebaseUID string `gorm:"unique;not null"`
 	Icon        int
 	Profile     int
 	CreatedAt   time.Time
@@ -16,8 +16,8 @@ type User struct {
 }
 
 type Post struct {
-	ID        int `gorm:"primaryKey"`
-	UserName  string
+	ID        int    `gorm:"primaryKey"`
+	UserName  string `gorm:"not null"`
 	Image     string
 	Reply     int
 	Likes     int
@@ -27,8 +27,8 @@ type Post struct {
 }
 
 type Like struct {
-	ID        int `gorm:"primaryKey"`
-	UserName  string
-	PostID    int
+	ID        int    `gorm:"primaryKey"`
+	UserName  string `gorm:"not null"`
+	PostID    int    `gorm:"not null"`
 	CreatedAt time.Time
 }
