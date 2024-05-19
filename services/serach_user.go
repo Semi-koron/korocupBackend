@@ -9,6 +9,9 @@ import (
 
 func SearchUser(c echo.Context) error {
 	searchUserName := c.Param("user_name")
-	users, _ := crud.FindUsersFromName(searchUserName)
+	users, err := crud.FindUsersFromName(searchUserName)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusNotFound, "No user found")
+	}
 	return c.JSON(http.StatusOK, users)
 }
