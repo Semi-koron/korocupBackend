@@ -26,10 +26,13 @@ func NewUser(c echo.Context) error {
 	user.FirebaseUID = c.Get("uid").(string)
 	user.Icon = obj.Icon
 	user.Profile = obj.Profile
+	if user.UserName == "" {
+		return echo.NewHTTPError(http.StatusBadRequest, "User name is required.")
+	}
 	user = crud.CreateUserDb(user)
 
 	if user.ID == 0 {
-		return echo.NewHTTPError(http.StatusConflict, "User name error")
+		return echo.NewHTTPError(http.StatusConflict, "This username is already exist.")
 	}
 
 	return c.JSON(http.StatusCreated, user)
