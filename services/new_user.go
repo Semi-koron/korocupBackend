@@ -32,6 +32,6 @@ func NewUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, "User name error")
 	}
 
-	return c.JSON(http.StatusCreated, user)
+	return c.JSON(http.StatusConflict, user)
 
 }
