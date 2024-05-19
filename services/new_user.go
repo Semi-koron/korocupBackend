@@ -12,8 +12,8 @@ func NewUser(c echo.Context) error {
 	type body struct {
 		UserName    string `json:"user_name"`
 		FirebaseUID string
-		Icon        int `json:"icon"`
-		Profile     int `json:"profile"`
+		Icon        string `json:"icon"`
+		Profile     int    `json:"profile"`
 	}
 	obj := body{}
 	user := database.User{}
