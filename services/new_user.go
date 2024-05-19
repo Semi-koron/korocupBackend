@@ -29,9 +29,9 @@ func NewUser(c echo.Context) error {
 	user = crud.CreateUserDb(user)
 
 	if user.ID == 0 {
-		return echo.NewHTTPError(http.StatusInternalServerError, "User name error")
+		return echo.NewHTTPError(http.StatusConflict, "User name error")
 	}
 
-	return c.JSON(http.StatusConflict, user)
+	return c.JSON(http.StatusCreated, user)
 
 }
