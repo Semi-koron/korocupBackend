@@ -21,9 +21,6 @@ func DeletePost(c echo.Context) error {
 	}
 
 	firebaseUid := c.Get("uid").(string)
-	if err := crud.CanDeletePost(firebaseUid, post); err != nil {
-		return err
-	}
 
 	post = crud.DeletePostDb(firebaseUid, imageId.Id)
 	return c.JSON(http.StatusOK, post)
