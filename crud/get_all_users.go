@@ -4,7 +4,7 @@ import (
 	"github.com/semikoron/korocupbackend/database"
 )
 
-func FetchUsersDb(users []database.User) []database.User {
+func GetUsersDb(users []database.User) []database.User {
 
 	database.DB.Find(&users)
 	return users

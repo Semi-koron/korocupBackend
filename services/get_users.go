@@ -8,10 +8,10 @@ import (
 	"github.com/semikoron/korocupbackend/database"
 )
 
-func FetchUsers(c echo.Context) error {
+func GetUsers(c echo.Context) error {
 
 	users := []database.User{}
-	users = crud.FetchUsersDb(users)
+	users = crud.GetUsersDb(users)
 	return c.JSON(http.StatusOK, users)
 
 }
