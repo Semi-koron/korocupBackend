@@ -3,7 +3,7 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: ./docker/air.dockerfile
+      dockerfile: ./docker/app.dockerfile
     tty: true
     ports:
       - 8080:8080
