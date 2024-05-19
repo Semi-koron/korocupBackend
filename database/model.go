@@ -8,7 +8,7 @@ type User struct {
 	ID          int    `gorm:"primaryKey"`
 	UserName    string `gorm:"unique;not null"`
 	FirebaseUID string `gorm:"unique;not null"`
-	Icon        int
+	Icon        string
 	Profile     int
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
