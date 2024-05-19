@@ -5,7 +5,6 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/semikoron/korocupbackend/crud"
-	"github.com/semikoron/korocupbackend/database"
 )
 
 func DeletePost(c echo.Context) error {
@@ -14,7 +13,6 @@ func DeletePost(c echo.Context) error {
 		Id int `json:"id"`
 	}
 	imageId := body{}
-	post := database.Post{}
 
 	if err := c.Bind(&imageId); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
@@ -22,7 +20,7 @@ func DeletePost(c echo.Context) error {
 
 	firebaseUid := c.Get("uid").(string)
 
-	post = crud.DeletePostDb(firebaseUid, imageId.Id)
+	post := crud.DeletePostDb(firebaseUid, imageId.Id)
 	return c.JSON(http.StatusOK, post)
 
 }
